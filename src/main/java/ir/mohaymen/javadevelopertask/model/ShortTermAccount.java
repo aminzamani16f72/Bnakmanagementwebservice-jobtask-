@@ -7,12 +7,11 @@ import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorValue("ShortTerm")
 @Data
 @Entity
 public class ShortTermAccount extends BankAccount{
-    private final Double interestRate=1.2;
+    private final double interestRate=1.2;
 
     @Override
     protected void addInterest() {

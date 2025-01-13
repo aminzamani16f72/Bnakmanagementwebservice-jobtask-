@@ -2,6 +2,7 @@ package ir.mohaymen.javadevelopertask.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 
 import java.util.Set;
 
