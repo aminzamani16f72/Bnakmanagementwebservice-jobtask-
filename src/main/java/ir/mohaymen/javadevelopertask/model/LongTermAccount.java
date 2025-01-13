@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @DiscriminatorValue("LongTerm")
 @Entity
 public class LongTermAccount extends BankAccount{
-    private final Double interestRate=1.8;
+    private final double interestRate=1.8;
 
     @Override
     protected void addInterest() {
