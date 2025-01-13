@@ -10,5 +10,6 @@ public class BankAccountDto {
     private Long accountNumber;
     private String owner;
     private long balance;
+    private String accountType;
 
 }
