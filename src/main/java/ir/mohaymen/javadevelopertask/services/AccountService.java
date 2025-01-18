@@ -37,10 +37,29 @@ public class AccountService  {
                 throw new IllegalArgumentException("Unsupported account type: " + accountType);
         }
     }
+    public void update(BankAccountDto accountDto, long id) {
+        BankAccount bankAccount = accountRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("BankAccount with id " + id + " not found"));
+
+        bankAccount.setAccountNumber(accountDto.getAccountNumber());
+        bankAccount.setBalance(accountDto.getBalance());
+        bankAccount.setOwner(accountDto.getOwner());
+
+        accountRepository.save(bankAccount);
+    }
+
+
 
     public BankAccountDto getAccountById(long id) {
         return accountRepository.findById(id)
                 .map(account -> dtoMapper.bankAccountToDto(account))
-                .orElse(null);
+                .orElseThrow(null);
     }
+
+    public void delete(long id) {
+        BankAccount account = accountRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("BankAccount not found with ID: " + id));
+        accountRepository.delete(account);
+    }
+
 }

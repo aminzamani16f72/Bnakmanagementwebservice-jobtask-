@@ -17,14 +17,14 @@ public class AccountController {
     private AccountService accountService;
 
 
-    public AccountController(AccountService accountService, DtoMapper dtoMapper) {
+    public AccountController(AccountService accountService) {
         this.accountService = accountService;
     }
+
     @GetMapping
-    public ResponseEntity<BankAccountDto> getAccount(@RequestParam("id") long id){
+    public ResponseEntity<BankAccountDto> getAccount(@RequestParam("id") long id) {
         BankAccountDto accountDto = accountService.getAccountById(id);
 
-        // Return the account if found, or 404 Not Found if not
         if (accountDto != null) {
             return ResponseEntity.ok(accountDto);
         } else {
@@ -34,9 +34,26 @@ public class AccountController {
 
 
     @PostMapping
-    public ResponseEntity<HttpStatus> addAccount(@RequestBody BankAccountDto bankAccountDto){
+    public ResponseEntity<String> addAccount(@RequestBody BankAccountDto bankAccountDto) {
         accountService.save(bankAccountDto);
-        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+        return ResponseEntity.status(HttpStatus.OK).body("Account created successfully");
     }
+
+    @PutMapping
+    public ResponseEntity<String> updateAccount(@RequestBody BankAccountDto bankAccountDto, @RequestParam("id") long id) {
+        accountService.update(bankAccountDto, id);
+        return ResponseEntity.status(HttpStatus.OK).body("Account updated successfully");
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteAccount(@RequestParam("id") long id) {
+        accountService.delete(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Account deleted successfully");
+    }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
 
 }
