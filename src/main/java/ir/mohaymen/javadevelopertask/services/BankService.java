@@ -21,7 +21,6 @@ public class BankService {
             firstAccount.withdraw(amount);
             secondAccount.deposit(amount);
 
-            // Save updated accounts
             bankAccountRepository.save(firstAccount);
             bankAccountRepository.save(secondAccount);
         } else {

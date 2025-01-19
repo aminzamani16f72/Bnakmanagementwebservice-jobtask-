@@ -23,8 +23,9 @@ public abstract class BankAccount {
     private String owner;
     private long balance;
 
-    @ManyToMany(mappedBy = "bankAccounts")
-    private Set<User> users=new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "user_id",nullable = false)
+    private User user;
 
     public void deposit(long amount) {
         this.balance += amount;

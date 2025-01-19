@@ -24,19 +24,14 @@ public class User implements Serializable {
 
     private String name;
     private String uniqueId;
-    @Column(unique = true,nullable = false)
+    @Column(unique = true,nullable = true)
     private Date birthDate;
     @Enumerated(EnumType.STRING)
     private UserType userType;
     private String phoneNumber;
     private String address;
     private String postalCode;
-    @ManyToMany
-    @JoinTable(
-            name = "user_bank_account",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "bank_account_id")
-    )
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private Set<BankAccount> bankAccounts = new HashSet<>();
 
 

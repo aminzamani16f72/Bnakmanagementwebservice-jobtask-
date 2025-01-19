@@ -4,6 +4,7 @@ import ir.mohaymen.javadevelopertask.DTO.BankAccountDto;
 import ir.mohaymen.javadevelopertask.DTO.TransferRequest;
 import ir.mohaymen.javadevelopertask.services.AccountService;
 import ir.mohaymen.javadevelopertask.services.BankService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 public class AccountController {
     @Autowired
     private AccountService accountService;
-    @Autowired
-    private BankService bankService;
 
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
