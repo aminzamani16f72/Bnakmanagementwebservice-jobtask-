@@ -1,10 +1,9 @@
 package ir.mohaymen.javadevelopertask.controller;
 
 import ir.mohaymen.javadevelopertask.DTO.BankAccountDto;
-import ir.mohaymen.javadevelopertask.mapper.DtoMapper;
-import ir.mohaymen.javadevelopertask.model.BankAccount;
+import ir.mohaymen.javadevelopertask.DTO.TransferRequest;
 import ir.mohaymen.javadevelopertask.services.AccountService;
-import jakarta.persistence.GeneratedValue;
+import ir.mohaymen.javadevelopertask.services.BankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 public class AccountController {
     @Autowired
     private AccountService accountService;
-
+    @Autowired
+    private BankService bankService;
 
     public AccountController(AccountService accountService) {
         this.accountService = accountService;
@@ -55,5 +55,6 @@ public class AccountController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
 
-
 }
+
+
