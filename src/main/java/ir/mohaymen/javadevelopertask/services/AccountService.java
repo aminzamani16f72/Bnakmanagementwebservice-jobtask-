@@ -23,7 +23,6 @@ public class AccountService  {
         this.accountRepository = accountRepository;
         this.dtoMapper=dtoMapper;
     }
-    @Transactional
     public void save(BankAccountDto accountDto) {
         Long userId=accountDto.getUserId();
         User user = userRepository.findById(userId)

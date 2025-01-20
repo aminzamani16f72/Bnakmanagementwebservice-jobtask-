@@ -4,6 +4,7 @@ import ir.mohaymen.javadevelopertask.model.BankAccount;
 import ir.mohaymen.javadevelopertask.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BankService {
@@ -11,6 +12,7 @@ public class BankService {
     @Autowired
     private AccountRepository bankAccountRepository;
 
+    @Transactional
     public void transfer(Long fromAccountId, Long toAccountId, long amount) {
         BankAccount firstAccount = bankAccountRepository.findById(fromAccountId)
                 .orElseThrow(() -> new RuntimeException("Source account not found"));
